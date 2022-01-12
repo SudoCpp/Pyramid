@@ -85,10 +85,7 @@ namespace pyramid
 
     void Pyramid::processWindowEvents(simplex::sdl::WindowEvent& event)
     {
-        Window* currentWindow = windows[0];
-        for(Window* window : windows)
-            if(window->windowId == event.windowID)
-                currentWindow = window;
+        Window* currentWindow = getCurrentWindow(event.windowID);
         if(!currentWindow)
             return;
             
@@ -106,12 +103,19 @@ namespace pyramid
             currentWindow->lostFocus.emit();
     }
 
-    void Pyramid::processMouseEvents(simplex::sdl::MouseEvent& event)
+    Window* Pyramid::getCurrentWindow(uint32_t windowID)
     {
         Window* currentWindow = windows[0];
         for(Window* window : windows)
-            if(window->windowId == event.windowID)
-                currentWindow = window;
+            if(window->windowId == windowID)
+                return window;
+        return nullptr;
+    }
+
+
+    void Pyramid::processMouseEvents(simplex::sdl::MouseEvent& event)
+    {
+        Window* currentWindow = getCurrentWindow(event.windowID);
         if(!currentWindow)
             return;
 
