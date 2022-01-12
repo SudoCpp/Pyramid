@@ -65,6 +65,8 @@ namespace pyramid
         simplex::Signal<int, int, simplex::sdl::MouseButton> mouseClick;
         simplex::Signal<int, int> mouseEnter;
         simplex::Signal<> mouseLeave;
+        simplex::Signal<int> mouseHorizontalScroll;
+        simplex::Signal<int> mouseVerticalScroll;
 
         Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation);
         virtual ~Widget();

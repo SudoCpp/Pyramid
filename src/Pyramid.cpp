@@ -149,10 +149,10 @@ namespace pyramid
                         widget->mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
             if(event.mouseEventType == MouseEventType::ButtonUp)
                 widget->mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
-            // if(event.mouseEventType & MouseEventType::ScrollHorizontal)
-            //     widget->mouseHorizontalScroll.emit(event.x);            
-            // if(event.mouseEventType & MouseEventType::ScrollVertical)
-            //     widget->mouseVerticalScroll.emit(event.y);
+            if(event.mouseEventType & MouseEventType::ScrollHorizontal)
+                widget->mouseHorizontalScroll.emit(event.x);            
+            if(event.mouseEventType & MouseEventType::ScrollVertical)
+                widget->mouseVerticalScroll.emit(event.y);
         }       
     }
 
