@@ -52,7 +52,7 @@ namespace pyramid
         private:
         void windowFocusGained();
         void windowFocusLost();
-        void handleMouseDown(int xPosition, int yPosition);
+        void handleMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton);
     };
 }
 

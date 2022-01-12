@@ -52,7 +52,7 @@ namespace pyramid
 
     }
 
-    void StatusBar::handleMouseDown(int xPosition, int yPosition)
+    void StatusBar::handleMouseDown(int xPosition, int yPosition, MouseButton mouseButton)
     {
         
     }

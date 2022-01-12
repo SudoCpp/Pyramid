@@ -101,4 +101,26 @@ namespace pyramid
             yCoordinate = canvasHeight - widget.height;
         }
     }
+
+    Widget* WidgetContainer::getFinalWidget(int& xPosition, int& yPosition)
+    {
+        for(Tuple<Widget*, int, int>* widgetGroup : widgets)
+        {
+            Widget* widget = widgetGroup->at<0>();
+            int widgetXPosition = widgetGroup->at<1>();
+            int widgetYPosition = widgetGroup->at<2>();
+            int widgetWidth = widget->width;
+            int widgetHeight= widget->height;
+            if(xPosition >= widgetXPosition 
+                && yPosition >= widgetYPosition 
+                && xPosition <= widgetXPosition + widgetWidth 
+                && yPosition <= widgetYPosition + widgetHeight)
+            {
+                xPosition = xPosition-widgetXPosition;
+                yPosition = yPosition-widgetYPosition;
+                return widget->getFinalWidget(xPosition, yPosition);
+            }
+        }
+        return nullptr;
+    }
 }

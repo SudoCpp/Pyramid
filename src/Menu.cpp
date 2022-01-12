@@ -36,6 +36,7 @@
 namespace pyramid
 {
     using namespace simplex;
+    using namespace simplex::sdl;
 
     Menu::Menu(string name)
     : Widget{name, AnchorPoint::MiddleLeft, 0, 0, DockLocation::Center}, windowHasFocus{true}
@@ -69,7 +70,7 @@ namespace pyramid
         }
     }
 
-    void Menu::handleMouseDown(int xPosition, int yPosition)
+    void Menu::handleMouseDown(int xPosition, int yPosition, MouseButton mouseButton)
     {
         //activated = true;
         Pyramid::RedrawWindows();

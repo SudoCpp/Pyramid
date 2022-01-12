@@ -41,7 +41,7 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Pyramid* Pyramid::instance = nullptr;
-    Pyramid::Pyramid() : Singleton{this} {}
+    Pyramid::Pyramid() : Singleton{this}, lastMouseWidget{nullptr} {}
     Pyramid::~Pyramid()
     {
         for(Window* window : windows)
@@ -118,17 +118,25 @@ namespace pyramid
         Window* currentWindow = getCurrentWindow(event.windowID);
         if(!currentWindow)
             return;
-
-        if(event.mouseEventType == MouseEventType::Move)
-             currentWindow->mouseMove.emit(event.x, event.y);
-        if(event.mouseEventType == MouseEventType::ButtonDown)
-            currentWindow->mouseDown.emit(event.x, event.y, event.mouseButton);
-        if(event.mouseEventType == MouseEventType::ButtonUp)
-            currentWindow->mouseUp.emit(event.x, event.y, event.mouseButton);
-        if(event.mouseEventType & MouseEventType::ScrollHorizontal)
-            currentWindow->mouseHorizontalScroll.emit(event.x);            
-        if(event.mouseEventType & MouseEventType::ScrollVertical)
-            currentWindow->mouseVerticalScroll.emit(event.y);            
+        int relativeXPosition = event.x;
+        int relativeYPosition = event.y;
+        Widget* widget = currentWindow->getFinalWidget(relativeXPosition, relativeYPosition);
+        if(widget)
+        {
+            // if(event.mouseEventType == MouseEventType::Move)
+            //     widget->mouseMove.emit(event.x, event.y);
+            if(event.mouseEventType == MouseEventType::ButtonDown)
+                widget->mouseDown.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+            if(event.mouseEventType == MouseEventType::ButtonUp)
+                if(lastMouseWidget)
+                        widget->mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+            if(event.mouseEventType == MouseEventType::ButtonUp)
+                widget->mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+            // if(event.mouseEventType & MouseEventType::ScrollHorizontal)
+            //     widget->mouseHorizontalScroll.emit(event.x);            
+            // if(event.mouseEventType & MouseEventType::ScrollVertical)
+            //     widget->mouseVerticalScroll.emit(event.y);
+        }       
     }
 
     void Pyramid::RedrawWindows()

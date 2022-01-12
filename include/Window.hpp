@@ -75,9 +75,6 @@ namespace pyramid
 
         void dispatchGainedWindowFocus();
         void dispatchLostWindowFocus();
-
-
-        void dispatchMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton);
     };
 }
 

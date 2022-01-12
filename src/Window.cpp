@@ -49,7 +49,6 @@ namespace pyramid
         restored.connect(&Window::draw, this);
         gainedFocus.connect(&Window::dispatchGainedWindowFocus, this);
         lostFocus.connect(&Window::dispatchLostWindowFocus, this);
-        mouseDown.connect(&Window::dispatchMouseDown, this);
         draw();
     }
 
@@ -115,26 +114,5 @@ namespace pyramid
         for(Tuple<Widget*, int, int>* widget : widgets)
             widget->at<0>()->lostWindowFocus.emit();
         draw();
-    }
-
-    void Window::dispatchMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton)
-    {
-        for(Tuple<Widget*, int, int>* widgetGroup : widgets)
-        {
-            Widget* widget = widgetGroup->at<0>();
-            int widgetXPosition = widgetGroup->at<1>();
-            int widgetYPosition = widgetGroup->at<2>();
-            int widgetWidth = widget->width;
-            int widgetHeight= widget->height;
-            if(xPosition >= widgetXPosition 
-                && yPosition >= widgetYPosition 
-                && xPosition <= widgetXPosition + widgetWidth 
-                && yPosition <= widgetYPosition + widgetHeight)
-            {
-                int modifiedXPosition = xPosition-widgetXPosition;
-                int modifiedYPosition = yPosition-widgetYPosition;
-                widget->mouseDown.emit(modifiedXPosition, modifiedYPosition);
-            }
-        }
     }
 }

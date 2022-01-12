@@ -98,7 +98,7 @@ namespace pyramid
         }
     }
 
-    void MenuBar::handleMouseDown(int xPosition, int yPosition)
+    void MenuBar::handleMouseDown(int xPosition, int yPosition, MouseButton mouseButton)
     {
         for(Tuple<Menu*, int, int>* menuGroup : menus)
         {
@@ -114,7 +114,7 @@ namespace pyramid
             {
                 int modifiedXPosition = xPosition - menuXPosition;
                 int modifiedYPosition = yPosition - menuYPosition;
-                menu->mouseDown.emit(modifiedXPosition, modifiedYPosition);
+                menu->mouseDown.emit(modifiedXPosition, modifiedYPosition, mouseButton);
             }
         }
     }

@@ -53,6 +53,8 @@ namespace pyramid
 
         static const int HoverTimer;
 
+        Widget* lastMouseWidget;
+
         public:
         ~Pyramid();
         static Window& CreateWindow(simplex::string title, int width, int height, bool resizable);

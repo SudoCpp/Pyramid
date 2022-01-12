@@ -59,13 +59,16 @@ namespace pyramid
         simplex::Signal<> gainedWindowFocus;
         simplex::Signal<> lostWindowFocus;
         simplex::Signal<int, int> hover;
-        simplex::Signal<int, int> mouseDown;
+        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseDown;
+        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseUp;
+        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseClick;
 
         Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation);
         virtual ~Widget();
 
         virtual void initWidget(Canvas& parentCanvas);
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight) = 0;
+        virtual Widget* getFinalWidget(int& xPosition, int& yPosition);
         void newCanvas();
         Canvas& getCanvas();
         void handleResize(int width, int height);

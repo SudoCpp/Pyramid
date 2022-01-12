@@ -66,4 +66,9 @@ namespace pyramid
         this->width = width;
         this->height = height;
     }
+
+    Widget* Widget::getFinalWidget(int& xPosition, int& yPosition)
+    {
+        return this;
+    }
 }

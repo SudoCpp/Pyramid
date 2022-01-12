@@ -54,6 +54,7 @@ namespace pyramid
 
         virtual void draw() = 0;
         static void GetCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate, int canvasWidth, int canvasHeight);
+        virtual Widget* getFinalWidget(int& xPosition, int& yPosition);
 
         template <typename WidgetType>
         WidgetType& addWidget(WidgetType* widget);

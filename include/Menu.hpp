@@ -61,7 +61,7 @@ namespace pyramid
         Menu(simplex::string name);
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
 
-        void handleMouseDown(int xPosition, int yPosition);
+        void handleMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton);
     };
 }
 
