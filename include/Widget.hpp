@@ -48,6 +48,7 @@ namespace pyramid
         Canvas* canvas;
         
         public:
+        int widgetID;
         simplex::string name;
         AnchorPoint anchorPoint;
         DockLocation dockLocation;

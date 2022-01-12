@@ -41,7 +41,7 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Pyramid* Pyramid::instance = nullptr;
-    Pyramid::Pyramid() : Singleton{this}, lastMouseWidget{nullptr} {}
+    Pyramid::Pyramid() : Singleton{this}, lastWidgetID{0}, lastMouseWidget{nullptr} {}
     Pyramid::~Pyramid()
     {
         for(Window* window : windows)
@@ -126,9 +126,13 @@ namespace pyramid
             // if(event.mouseEventType == MouseEventType::Move)
             //     widget->mouseMove.emit(event.x, event.y);
             if(event.mouseEventType == MouseEventType::ButtonDown)
+            {
                 widget->mouseDown.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+                lastMouseWidget = widget;
+            }
             if(event.mouseEventType == MouseEventType::ButtonUp)
                 if(lastMouseWidget)
+                    if(lastMouseWidget->widgetID == widget->widgetID)
                         widget->mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
             if(event.mouseEventType == MouseEventType::ButtonUp)
                 widget->mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
@@ -137,6 +141,11 @@ namespace pyramid
             // if(event.mouseEventType & MouseEventType::ScrollVertical)
             //     widget->mouseVerticalScroll.emit(event.y);
         }       
+    }
+
+    int Pyramid::GetWidgetID()
+    {
+        return GetInstance().lastWidgetID++;
     }
 
     void Pyramid::RedrawWindows()

@@ -31,11 +31,12 @@
 */
 
 #include "Widget.hpp"
+#include "Pyramid.hpp"
 
 namespace pyramid
 {
     Widget::Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation) : simplex::object{},
-    name{name}, anchorPoint{anchorPoint}, dockLocation{dockLocation}, width{width}, height{height},
+    widgetID{Pyramid::GetWidgetID()}, name{name}, anchorPoint{anchorPoint}, dockLocation{dockLocation}, width{width}, height{height},
     toolTipText{""}
     { }
 
