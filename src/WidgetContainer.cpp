@@ -37,7 +37,8 @@ namespace pyramid
     using namespace simplex::sdl;
     using namespace simplex;
 
-    WidgetContainer::WidgetContainer()
+    WidgetContainer::WidgetContainer(simplex::string name, int width, int height)
+    :Widget{name, AnchorPoint::TopLeft, width, height, DockLocation::Center}
     {
         resized.connect(&WidgetContainer::draw, this);
         canvas = nullptr;

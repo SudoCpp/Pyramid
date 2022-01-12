@@ -40,7 +40,8 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Window::Window(string title, int width, int height, bool resizable)
-    : window{Framework::CreateWindow(title, width, height, resizable)}, 
+    : WidgetContainer(title, width, height),
+    window{Framework::CreateWindow(title, width, height, resizable)}, 
     renderer{window.createRenderer()}, windowId{window.getID()}
     {
         canvas = new Canvas(renderer, width, height);

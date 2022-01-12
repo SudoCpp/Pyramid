@@ -69,6 +69,7 @@ namespace pyramid
         virtual void draw();
 
         private:
+        virtual void draw(int parentCanvasWidth, int parentCanvasHeight){}
         void displayCanvas();
         void regenCanvas();
 

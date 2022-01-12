@@ -39,7 +39,7 @@
 
 namespace pyramid
 {
-    class WidgetContainer : public simplex::object
+    class WidgetContainer : public Widget
     {
         protected:
         Canvas* canvas;
@@ -49,7 +49,7 @@ namespace pyramid
         public:
         simplex::Signal<> resized;
 
-        WidgetContainer();
+        WidgetContainer(simplex::string name, int width, int height);
         virtual ~WidgetContainer();
 
         virtual void draw() = 0;
