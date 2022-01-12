@@ -50,18 +50,17 @@ namespace pyramid
         static RGBColor HilightBackgroundColor;
         static RGBColor HilightTextColor;
 
-        bool activated;
         bool windowHasFocus;
 
         public:
         simplex::Signal<> activate;
         simplex::Signal<> deactivate;
+        simplex::Signal<> activated;
+        simplex::Signal<> deactivated;
 
         Menu(simplex::string name);
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
 
-        void activateMenu();
-        void deactivateMenu();
         void handleMouseDown(int xPosition, int yPosition);
     };
 }

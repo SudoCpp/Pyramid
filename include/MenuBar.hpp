@@ -42,11 +42,12 @@ namespace pyramid
     {
         static const int MenuBarHeight;
         simplex::Array<simplex::Tuple<Menu*, int, int>*> menus;
+        bool activated;
         public:
         MenuBar(simplex::string name);
         ~MenuBar();
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
-        Menu& addMenu(Menu* menu);
+        Menu& addMenu(simplex::string menuName);
 
         private:
         void windowFocusGained();

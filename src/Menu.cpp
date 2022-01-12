@@ -38,10 +38,8 @@ namespace pyramid
     using namespace simplex;
 
     Menu::Menu(string name)
-    : Widget{name, AnchorPoint::MiddleLeft, 0, 0, DockLocation::Center}, activated{false}, windowHasFocus{true}
+    : Widget{name, AnchorPoint::MiddleLeft, 0, 0, DockLocation::Center}, windowHasFocus{true}
     {
-        activate.connect(&Menu::activateMenu, this);
-        deactivate.connect(&Menu::deactivateMenu, this);
         mouseDown.connect(&Menu::handleMouseDown, this);
     }
 
@@ -59,11 +57,11 @@ namespace pyramid
             getCanvas().fillRect(BackgroundColor, 0, 0, width, height);
             getCanvas().drawText(TextColorNoWindowFocus, FontPath, FontSize, 0, textPositionHeight, nameToUse);
         }
-        else if(activated)
-        {
-            getCanvas().fillRect(HilightBackgroundColor, 0, 0, width, height);
-            getCanvas().drawText(HilightTextColor, FontPath, FontSize, 0, textPositionHeight, nameToUse);
-        }
+        // else if(activated)
+        // {
+        //     getCanvas().fillRect(HilightBackgroundColor, 0, 0, width, height);
+        //     getCanvas().drawText(HilightTextColor, FontPath, FontSize, 0, textPositionHeight, nameToUse);
+        // }
         else
         {
             getCanvas().fillRect(BackgroundColor, 0, 0, width, height);
@@ -71,19 +69,9 @@ namespace pyramid
         }
     }
 
-    void Menu::activateMenu()
-    {
-        activated = true;
-    }
-
-    void Menu::deactivateMenu()
-    {
-        activated = false;
-    }
-
     void Menu::handleMouseDown(int xPosition, int yPosition)
     {
-        activated = true;
+        //activated = true;
         Pyramid::RedrawWindows();
     }
 }

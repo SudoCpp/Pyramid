@@ -40,10 +40,12 @@
 namespace pyramid
 {
     class Window;
+    class Widget;
     class Pyramid : public simplex::Singleton
     {
         static Pyramid* instance;
         simplex::Array<Window*> windows;
+        int lastWidgetID;
 
         static const RGBColor WidgetTextColor;
         static const RGBColor WidgetForegroundColor;
@@ -56,12 +58,15 @@ namespace pyramid
         static Window& CreateWindow(simplex::string title, int width, int height, bool resizable);
         static void StartEventLoop();
         static void RedrawWindows();
+        static int GetWidgetID();
 
         private:
         static Pyramid& GetInstance();
         Pyramid();
         void processWindowEvents(simplex::sdl::WindowEvent& event);
         void processMouseEvents(simplex::sdl::MouseEvent& event);
+        Widget* getWidgetAtMouse(Window& window, int xPosition, int yPosition);
+        Window* getCurrentWindow(uint32_t windowID);
     };
 }
 
