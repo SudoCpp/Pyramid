@@ -56,8 +56,8 @@ namespace pyramid
         static void GetCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate, int canvasWidth, int canvasHeight);
         virtual Widget& getFinalWidget(int& xPosition, int& yPosition);
 
-        template <typename WidgetType>
-        WidgetType& addWidget(WidgetType* widget);
+        template <typename WidgetType, typename... Args>
+        WidgetType& addWidget(Args&&... args);
 
         template <typename WidgetType>
         WidgetType& getWidget(simplex::string widgetName);
@@ -68,9 +68,10 @@ namespace pyramid
 
     #define __class__ "pyramid::WidgetContainer"
 
-    template <typename WidgetType>
-    WidgetType& WidgetContainer::addWidget(WidgetType* widget)
+    template <typename WidgetType, typename... Args>
+    WidgetType& WidgetContainer::addWidget(Args&&... args)
     {
+        WidgetType* widget = new WidgetType(std::forward<Args>(args)...);
         widget->initWidget(*canvas);
         widgets.add(new simplex::Tuple<Widget*, int, int>{widget, 0, 0});
         return *widget;
