@@ -59,10 +59,12 @@ namespace pyramid
 
         simplex::Signal<> gainedWindowFocus;
         simplex::Signal<> lostWindowFocus;
-        simplex::Signal<int, int> hover;
+
         simplex::Signal<int, int, simplex::sdl::MouseButton> mouseDown;
         simplex::Signal<int, int, simplex::sdl::MouseButton> mouseUp;
         simplex::Signal<int, int, simplex::sdl::MouseButton> mouseClick;
+        simplex::Signal<int, int> mouseEnter;
+        simplex::Signal<> mouseLeave;
 
         Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation);
         virtual ~Widget();

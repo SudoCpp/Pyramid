@@ -41,7 +41,8 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Pyramid* Pyramid::instance = nullptr;
-    Pyramid::Pyramid() : Singleton{this}, lastWidgetID{0}, lastMouseWidget{nullptr} {}
+    Pyramid::Pyramid() : Singleton{this}, lastWidgetID{0}, lastMouseButtonWidget{nullptr},
+    lastMouseHoverWidget{nullptr} {}
     Pyramid::~Pyramid()
     {
         for(Window* window : windows)
@@ -123,16 +124,28 @@ namespace pyramid
         Widget* widget = currentWindow->getFinalWidget(relativeXPosition, relativeYPosition);
         if(widget)
         {
-            // if(event.mouseEventType == MouseEventType::Move)
-            //     widget->mouseMove.emit(event.x, event.y);
+            if(event.mouseEventType == MouseEventType::Move)
+            {
+                if(lastMouseHoverWidget)
+                {
+                    if(lastMouseHoverWidget->widgetID != widget->widgetID)
+                    {
+                        lastMouseHoverWidget->mouseLeave.emit();
+                        widget->mouseEnter.emit(relativeXPosition, relativeYPosition);
+                    }
+                }
+                else 
+                    widget->mouseEnter.emit(relativeXPosition, relativeYPosition);
+                lastMouseHoverWidget = widget;
+            }
             if(event.mouseEventType == MouseEventType::ButtonDown)
             {
                 widget->mouseDown.emit(relativeXPosition, relativeYPosition, event.mouseButton);
-                lastMouseWidget = widget;
+                lastMouseButtonWidget = widget;
             }
             if(event.mouseEventType == MouseEventType::ButtonUp)
-                if(lastMouseWidget)
-                    if(lastMouseWidget->widgetID == widget->widgetID)
+                if(lastMouseButtonWidget)
+                    if(lastMouseButtonWidget->widgetID == widget->widgetID)
                         widget->mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
             if(event.mouseEventType == MouseEventType::ButtonUp)
                 widget->mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);

@@ -53,7 +53,8 @@ namespace pyramid
 
         static const int HoverTimer;
 
-        Widget* lastMouseWidget;
+        Widget* lastMouseButtonWidget;
+        Widget* lastMouseHoverWidget;
 
         public:
         ~Pyramid();
