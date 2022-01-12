@@ -68,8 +68,8 @@ namespace pyramid
         Pyramid();
         void processWindowEvents(simplex::sdl::WindowEvent& event);
         void processMouseEvents(simplex::sdl::MouseEvent& event);
-        Widget* getWidgetAtMouse(Window& window, int xPosition, int yPosition);
-        Window* getCurrentWindow(uint32_t windowID);
+        Widget& getWidgetAtMouse(Window& window, int xPosition, int yPosition);
+        Window& getCurrentWindow(uint32_t windowID);
     };
 }
 

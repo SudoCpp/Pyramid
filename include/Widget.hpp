@@ -73,7 +73,7 @@ namespace pyramid
 
         virtual void initWidget(Canvas& parentCanvas);
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight) = 0;
-        virtual Widget* getFinalWidget(int& xPosition, int& yPosition);
+        virtual Widget& getFinalWidget(int& xPosition, int& yPosition);
         void newCanvas();
         Canvas& getCanvas();
         void handleResize(int width, int height);

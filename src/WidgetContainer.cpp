@@ -102,7 +102,7 @@ namespace pyramid
         }
     }
 
-    Widget* WidgetContainer::getFinalWidget(int& xPosition, int& yPosition)
+    Widget& WidgetContainer::getFinalWidget(int& xPosition, int& yPosition)
     {
         for(Tuple<Widget*, int, int>* widgetGroup : widgets)
         {
@@ -121,6 +121,6 @@ namespace pyramid
                 return widget->getFinalWidget(xPosition, yPosition);
             }
         }
-        return nullptr;
+        return *this;
     }
 }

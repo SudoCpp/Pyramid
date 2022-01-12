@@ -86,74 +86,68 @@ namespace pyramid
 
     void Pyramid::processWindowEvents(simplex::sdl::WindowEvent& event)
     {
-        Window* currentWindow = getCurrentWindow(event.windowID);
-        if(!currentWindow)
-            return;
+        Window& currentWindow = getCurrentWindow(event.windowID);
             
         if(event.windowType == WindowEventType::Minimized)
-            currentWindow->minimized.emit();
+            currentWindow.minimized.emit();
         else if(event.windowType == WindowEventType::Maxamized)
-            currentWindow->maximized.emit();
+            currentWindow.maximized.emit();
         else if(event.windowType == WindowEventType::Resized)
-            currentWindow->resized.emit();
+            currentWindow.resized.emit();
         else if(event.windowType == WindowEventType::Restored)
-            currentWindow->restored.emit();
+            currentWindow.restored.emit();
         else if(event.windowType == WindowEventType::GainedFocus)
-            currentWindow->gainedFocus.emit();
+            currentWindow.gainedFocus.emit();
         else if(event.windowType == WindowEventType::LostFocus)
-            currentWindow->lostFocus.emit();
+            currentWindow.lostFocus.emit();
     }
 
-    Window* Pyramid::getCurrentWindow(uint32_t windowID)
+    Window& Pyramid::getCurrentWindow(uint32_t windowID)
     {
         Window* currentWindow = windows[0];
         for(Window* window : windows)
             if(window->windowId == windowID)
-                return window;
-        return nullptr;
+                return *window;
+        throw Exception("Unable to determine current window.", __ExceptionParams__);
     }
 
 
     void Pyramid::processMouseEvents(simplex::sdl::MouseEvent& event)
     {
-        Window* currentWindow = getCurrentWindow(event.windowID);
-        if(!currentWindow)
-            return;
+        Window& currentWindow = getCurrentWindow(event.windowID);
+
         int relativeXPosition = event.x;
         int relativeYPosition = event.y;
-        Widget* widget = currentWindow->getFinalWidget(relativeXPosition, relativeYPosition);
-        if(widget)
+        Widget& widget = currentWindow.getFinalWidget(relativeXPosition, relativeYPosition);
+        if(event.mouseEventType == MouseEventType::Move)
         {
-            if(event.mouseEventType == MouseEventType::Move)
+            if(lastMouseHoverWidget)
             {
-                if(lastMouseHoverWidget)
+                if(lastMouseHoverWidget->widgetID != widget.widgetID)
                 {
-                    if(lastMouseHoverWidget->widgetID != widget->widgetID)
-                    {
-                        lastMouseHoverWidget->mouseLeave.emit();
-                        widget->mouseEnter.emit(relativeXPosition, relativeYPosition);
-                    }
+                    lastMouseHoverWidget->mouseLeave.emit();
+                    widget.mouseEnter.emit(relativeXPosition, relativeYPosition);
                 }
-                else 
-                    widget->mouseEnter.emit(relativeXPosition, relativeYPosition);
-                lastMouseHoverWidget = widget;
             }
-            if(event.mouseEventType == MouseEventType::ButtonDown)
-            {
-                widget->mouseDown.emit(relativeXPosition, relativeYPosition, event.mouseButton);
-                lastMouseButtonWidget = widget;
-            }
-            if(event.mouseEventType == MouseEventType::ButtonUp)
-                if(lastMouseButtonWidget)
-                    if(lastMouseButtonWidget->widgetID == widget->widgetID)
-                        widget->mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
-            if(event.mouseEventType == MouseEventType::ButtonUp)
-                widget->mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
-            if(event.mouseEventType & MouseEventType::ScrollHorizontal)
-                widget->mouseHorizontalScroll.emit(event.x);            
-            if(event.mouseEventType & MouseEventType::ScrollVertical)
-                widget->mouseVerticalScroll.emit(event.y);
-        }       
+            else 
+                widget.mouseEnter.emit(relativeXPosition, relativeYPosition);
+            lastMouseHoverWidget = &widget;
+        }
+        if(event.mouseEventType == MouseEventType::ButtonDown)
+        {
+            widget.mouseDown.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+            lastMouseButtonWidget = &widget;
+        }
+        if(event.mouseEventType == MouseEventType::ButtonUp)
+            if(lastMouseButtonWidget)
+                if(lastMouseButtonWidget->widgetID == widget.widgetID)
+                    widget.mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+        if(event.mouseEventType == MouseEventType::ButtonUp)
+            widget.mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+        if(event.mouseEventType & MouseEventType::ScrollHorizontal)
+            widget.mouseHorizontalScroll.emit(event.x);            
+        if(event.mouseEventType & MouseEventType::ScrollVertical)
+            widget.mouseVerticalScroll.emit(event.y);
     }
 
     int Pyramid::GetWidgetID()
