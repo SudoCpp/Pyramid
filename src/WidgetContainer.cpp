@@ -40,7 +40,6 @@ namespace pyramid
     WidgetContainer::WidgetContainer(simplex::string name, int width, int height)
     :Widget{name, AnchorPoint::TopLeft, width, height, DockLocation::Center}
     {
-        resized.connect(&WidgetContainer::draw, this);
         canvas = nullptr;
     }
 

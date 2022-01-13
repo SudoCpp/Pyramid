@@ -30,52 +30,17 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __PYRAMID_WINDOW_HPP__
-#define __PYRAMID_WINDOW_HPP__
-
-#include "simplextk.hpp"
-#include "simplexsdl.hpp"
-#include "MenuBar.hpp"
-#include "StatusBar.hpp"
-#include "WidgetContainer.hpp"
+#include "TableContainer.hpp"
 
 namespace pyramid
 {
-    class Window : public WidgetContainer
+    void TableContainer::setActualValues()
     {
-        friend class Pyramid;
 
-        simplex::sdl::Window& window;
-        simplex::sdl::Renderer& renderer;
-        
-        public:
-        uint32_t windowId;
+    }
 
-        simplex::Signal<> maximized;
-        simplex::Signal<> minimized;
-        simplex::Signal<> restored;
-        simplex::Signal<> gainedFocus;
-        simplex::Signal<> lostFocus;
-
-        simplex::Signal<int, int> mouseMove;
-        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseDown;
-        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseUp;
-        simplex::Signal<int> mouseHorizontalScroll;
-        simplex::Signal<int> mouseVerticalScroll;
-
-        Window(simplex::string title, int width, int height, bool resizable);
-        ~Window();
-
-        void draw();
-
-        private:
-        virtual void draw(int parentCanvasWidth, int parentCanvasHeight){}
-        void displayCanvas();
-        void regenCanvas();
-
-        void dispatchGainedWindowFocus();
-        void dispatchLostWindowFocus();
-    };
+    void TableContainer::draw(int parentCanvasWidth, int parentCanvasHeight)
+    {
+        setActualValues();
+    }
 }
-
-#endif //__PYRAMID_WINDOW_HPP__

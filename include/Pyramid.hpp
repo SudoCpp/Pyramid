@@ -59,7 +59,7 @@ namespace pyramid
         public:
         ~Pyramid();
         static Window& CreateWindow(simplex::string title, int width, int height, bool resizable);
-        static void StartEventLoop();
+        static void StartProgram();
         static void RedrawWindows();
         static int GetWidgetID();
 

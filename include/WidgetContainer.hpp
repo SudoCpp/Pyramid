@@ -52,7 +52,6 @@ namespace pyramid
         WidgetContainer(simplex::string name, int width, int height);
         virtual ~WidgetContainer();
 
-        virtual void draw() = 0;
         static void GetCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate, int canvasWidth, int canvasHeight);
         virtual Widget& getFinalWidget(int& xPosition, int& yPosition);
 

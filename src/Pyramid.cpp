@@ -62,7 +62,7 @@ namespace pyramid
         return *window;
     }
 
-    void Pyramid::StartEventLoop()
+    void Pyramid::StartProgram()
     {
         Pyramid& instance = GetInstance();
         Event* event;

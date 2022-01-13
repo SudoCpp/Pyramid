@@ -30,52 +30,25 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __PYRAMID_WINDOW_HPP__
-#define __PYRAMID_WINDOW_HPP__
+#ifndef PYRAMID_TABLECONTAINER_HPP
+#define PYRAMID_TABLECONTAINER_HPP
 
-#include "simplextk.hpp"
-#include "simplexsdl.hpp"
-#include "MenuBar.hpp"
-#include "StatusBar.hpp"
 #include "WidgetContainer.hpp"
 
 namespace pyramid
 {
-    class Window : public WidgetContainer
+    class TableContainer : public WidgetContainer
     {
-        friend class Pyramid;
+        simplex::Array<int> rowActual;
+        simplex::Array<int> columnActual;
 
-        simplex::sdl::Window& window;
-        simplex::sdl::Renderer& renderer;
-        
-        public:
-        uint32_t windowId;
+        public:        
+        simplex::Array<simplex::string>rows;
+        simplex::Array<simplex::string> columns;
 
-        simplex::Signal<> maximized;
-        simplex::Signal<> minimized;
-        simplex::Signal<> restored;
-        simplex::Signal<> gainedFocus;
-        simplex::Signal<> lostFocus;
-
-        simplex::Signal<int, int> mouseMove;
-        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseDown;
-        simplex::Signal<int, int, simplex::sdl::MouseButton> mouseUp;
-        simplex::Signal<int> mouseHorizontalScroll;
-        simplex::Signal<int> mouseVerticalScroll;
-
-        Window(simplex::string title, int width, int height, bool resizable);
-        ~Window();
-
-        void draw();
-
-        private:
-        virtual void draw(int parentCanvasWidth, int parentCanvasHeight){}
-        void displayCanvas();
-        void regenCanvas();
-
-        void dispatchGainedWindowFocus();
-        void dispatchLostWindowFocus();
+        virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
+        void setActualValues();
     };
 }
 
-#endif //__PYRAMID_WINDOW_HPP__
+#endif //PYRAMID_TABLECONTAINER_HPP

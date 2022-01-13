@@ -47,6 +47,7 @@ namespace pyramid
         canvas = new Canvas(renderer, width, height);
         maximized.connect(&Window::draw, this);
         restored.connect(&Window::draw, this);
+        resized.connect(&Window::draw, this);
         gainedFocus.connect(&Window::dispatchGainedWindowFocus, this);
         lostFocus.connect(&Window::dispatchLostWindowFocus, this);
         draw();

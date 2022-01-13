@@ -18,6 +18,7 @@ set(SourceFiles
     src/Pyramid.cpp
     src/RGBColor.cpp
     src/StatusBar.cpp
+    src/TableContainer.cpp
     src/Widget.cpp
     src/WidgetContainer.cpp
     src/Window.cpp
