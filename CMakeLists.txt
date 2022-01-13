@@ -9,12 +9,14 @@ set(LinkedLibraryNames
     simplexsdl)
 
 set(SourceFiles
+    src/Button.cpp
     src/Canvas.cpp
     src/CMYColor.cpp
     src/Defaults.cpp
     src/Label.cpp
     src/Menu.cpp
     src/MenuBar.cpp
+    src/MessageBox.cpp
     src/Pyramid.cpp
     src/RGBColor.cpp
     src/StatusBar.cpp
