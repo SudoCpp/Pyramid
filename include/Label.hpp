@@ -41,7 +41,10 @@ namespace pyramid
     {
         public:
         simplex::string text;
-        
+        Label(simplex::string name, simplex::string text);
+        ~Label();
+
+        virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
     };
 }
 

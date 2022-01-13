@@ -34,5 +34,18 @@
 
 namespace pyramid
 {
-    
+    using namespace simplex;
+    using namespace simplex::sdl;
+
+    Label::Label(string name, string text)
+    : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
+    text{text}
+    {
+
+    }
+
+    Label::~Label(){}
+
+    void Label::draw(int parentCanvasWidth, int parentCanvasHeight)
+    {}
 }
