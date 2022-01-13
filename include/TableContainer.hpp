@@ -46,8 +46,12 @@ namespace pyramid
         simplex::Array<simplex::string>rows;
         simplex::Array<simplex::string> columns;
 
+        TableContainer(simplex::string name);
+        virtual ~TableContainer();
+
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
-        void setActualValues();
+        void setActualValues(int parentCanvasWidth, int parentCanvasHeight);
+        void setPixelData(int parentCanvasValue, simplex::string dataType, simplex::Array<simplex::string>& array, simplex::Array<int>& actualArray);
     };
 }
 

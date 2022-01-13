@@ -57,7 +57,7 @@ namespace pyramid
         Widget* lastMouseHoverWidget;
 
         public:
-        ~Pyramid();
+        virtual ~Pyramid();
         static Window& CreateWindow(simplex::string title, int width, int height, bool resizable);
         static void StartProgram();
         static void RedrawWindows();

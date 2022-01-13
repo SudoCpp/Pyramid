@@ -45,7 +45,7 @@ namespace pyramid
         bool activated;
         public:
         MenuBar(simplex::string name);
-        ~MenuBar();
+        virtual ~MenuBar();
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
         Menu& addMenu(simplex::string menuName);
 

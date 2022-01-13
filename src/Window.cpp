@@ -63,6 +63,7 @@ namespace pyramid
 
         int topOffset = 0;
         int bottomOffset = 0;
+        bool centerPopulated = false;
         
         int widgetArraySize = widgets.size();
         for(int loop = 0; loop < widgetArraySize; loop++)
@@ -83,6 +84,11 @@ namespace pyramid
                 widgetGroup->at<1>(0);
                 widgetGroup->at<2>(canvas->height-bottomOffset);
                 canvas->copyToCanvas(widget->getCanvas(), 0, canvas->height-bottomOffset);
+            }
+            else if(widget->dockLocation == DockLocation::Center && !centerPopulated)
+            {
+                centerPopulated = true;
+                canvas->copyToCanvas(widget->getCanvas(), 0, topOffset);
             }
         }
         displayCanvas();

@@ -44,6 +44,8 @@ namespace pyramid
         mouseDown.connect(&Menu::handleMouseDown, this);
     }
 
+    Menu::~Menu(){}
+
     void Menu::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
         string nameToUse = "  "+name+"  ";

@@ -43,6 +43,8 @@ namespace pyramid
         mouseDown.connect(&StatusBar::handleMouseDown, this);
     }
 
+    StatusBar::~StatusBar(){}
+
     void StatusBar::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
         width = parentCanvasWidth;

@@ -42,6 +42,7 @@ namespace pyramid
         static const int StatusBarHeight;
         public:
         StatusBar(simplex::string name);
+        virtual ~StatusBar();
 
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
         void handleMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton);

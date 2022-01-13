@@ -59,6 +59,7 @@ namespace pyramid
         simplex::Signal<> deactivated;
 
         Menu(simplex::string name);
+        virtual ~Menu();
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
 
         void handleMouseDown(int xPosition, int yPosition, simplex::sdl::MouseButton mouseButton);
