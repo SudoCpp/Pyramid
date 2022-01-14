@@ -37,9 +37,10 @@ namespace pyramid
     using namespace simplex;
     using namespace simplex::sdl;
 
-    Label::Label(string name, string text)
+    Label::Label(string name, string text, string fontPath, int fontSize, RGBColor textColor, RGBColor backgroundColor)
     : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
-    text{text}
+    text{text}, textColor{textColor}, backgroundColor{backgroundColor}, fontPath{fontPath},
+    fontSize{fontSize}
     {
 
     }
@@ -47,5 +48,7 @@ namespace pyramid
     Label::~Label(){}
 
     void Label::draw(int parentCanvasWidth, int parentCanvasHeight)
-    {}
+    {
+        getCanvas().drawText(textColor, fontPath, fontSize, 0, 0, text);
+    }
 }

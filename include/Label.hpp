@@ -41,7 +41,13 @@ namespace pyramid
     {
         public:
         simplex::string text;
-        Label(simplex::string name, simplex::string text);
+        RGBColor textColor;
+        RGBColor backgroundColor;
+        simplex::string fontPath;
+        int fontSize;
+
+        Label(simplex::string name, simplex::string text, simplex::string fontPath, int fontSize, 
+        RGBColor textColor, RGBColor backgroundColor);
         ~Label();
 
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
