@@ -54,13 +54,6 @@ namespace pyramid
             instance = new Pyramid();
         return *instance;
     }
-    Window& Pyramid::CreateWindow(string title, int width, int height, bool resizable)
-    {
-        Window* window = new Window(title, width, height, resizable);
-        Pyramid& pyramid = GetInstance();
-        pyramid.windows.add(window);
-        return *window;
-    }
 
     void Pyramid::StartProgram()
     {

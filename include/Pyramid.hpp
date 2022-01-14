@@ -58,7 +58,8 @@ namespace pyramid
 
         public:
         virtual ~Pyramid();
-        static Window& CreateWindow(simplex::string title, int width, int height, bool resizable);
+        template <typename WindowType, typename... Args>
+        static WindowType& CreateWindow(Args&&... args);
         static void StartProgram();
         static void RedrawWindows();
         static int GetWidgetID();
@@ -71,6 +72,19 @@ namespace pyramid
         Widget& getWidgetAtMouse(Window& window, int xPosition, int yPosition);
         Window& getCurrentWindow(uint32_t windowID);
     };
+
+    #define __class__ "pyramid::Pyramid"
+
+    template <typename WindowType, typename... Args>
+    WindowType& Pyramid::CreateWindow(Args&&... args)
+    {
+        WindowType* window = new WindowType(std::forward<Args>(args)...);
+        Pyramid& pyramid = GetInstance();
+        pyramid.windows.add(window);
+        return *window;
+    }
+
+    #undef __class__
 }
 
 #endif //__PYRAMID_PYRAMID_HPP__
