@@ -37,15 +37,27 @@ namespace pyramid
     using namespace simplex;
     using namespace simplex::sdl;
 
-    Button::Button(string name, string text)
+    Button::Button(string name, string text, string fontPath, int fontSize, RGBColor textColor, RGBColor buttonColor)
     : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
-    text{name, text}, buttonDepressed{false}
-    {
+    text{nullptr}, buttonDepressed{false}, buttonText{text},
+    textColor{textColor}, buttonColor{buttonColor}, fontPath{fontPath}, fontSize{fontSize}
+    {}
 
+    Button::~Button()
+    {
+        delete text;
     }
 
-    Button::~Button(){}
-
     void Button::draw(int parentCanvasWidth, int parentCanvasHeight)
-    {}
+    {
+        width = 200;
+        height = 25;
+        delete text;
+        text = new Label{"text", buttonText, fontPath, fontSize, textColor, buttonColor};
+        text->draw(parentCanvasWidth, parentCanvasHeight);
+        canvas->drawRect(Color::Blue, 0, 0, width, height);
+        int xPosition, yPosition;
+        canvas->getCanvasCoordinates(*text, xPosition, yPosition);
+        canvas->copyToCanvas(text->getCanvas(), xPosition, yPosition);
+    }
 }

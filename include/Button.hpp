@@ -41,9 +41,16 @@ namespace pyramid
     class Button : public Widget
     {
         bool buttonDepressed;
-        Label text;
+        Label* text;
         public:
-        Button(simplex::string name, simplex::string text);
+        simplex::string buttonText;
+        RGBColor textColor;
+        RGBColor buttonColor;
+        simplex::string fontPath;
+        int fontSize;
+
+        Button(simplex::string name, simplex::string text, simplex::string fontPath, int fontSize,
+        RGBColor textColor, RGBColor buttonColor);
         virtual ~Button();
         
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
