@@ -39,6 +39,7 @@
 
 namespace pyramid
 {
+    class Widget;
     class Canvas
     {
         friend class Window; //So can see texture for rendering to screen
@@ -57,6 +58,7 @@ namespace pyramid
         void drawText(RGBColor color, simplex::string fontFileName, int fontSize, int x, int y, simplex::string text);
         void copyToCanvas(Canvas& childCanvas, int xPosition, int yPosition);
         Canvas* createNewCanvas(int width, int height) const;
+        void getCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate);
 
         static void GetTextSize(simplex::string fontFileName, int fontSize, const simplex::string& text, int& width, int& height);
     };

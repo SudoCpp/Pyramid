@@ -52,55 +52,6 @@ namespace pyramid
         }
     }
 
-    void WidgetContainer::GetCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate, int canvasWidth, int canvasHeight)
-    {
-        if(widget.anchorPoint == AnchorPoint::TopLeft)
-        {
-            xCoordinate = 0;
-            yCoordinate = 0;
-        }
-        else if(widget.anchorPoint == AnchorPoint::TopCenter)
-        {
-            xCoordinate = (canvasWidth - widget.width)/2;
-            yCoordinate = 0;
-        }
-        else if(widget.anchorPoint == AnchorPoint::TopRight)
-        {
-            xCoordinate = canvasWidth - widget.width;
-            yCoordinate = 0;
-        }
-        else if(widget.anchorPoint == AnchorPoint::MiddleLeft)
-        {
-            xCoordinate = 0;
-            yCoordinate = (canvasHeight - widget.height)/2;
-        }
-        else if(widget.anchorPoint == AnchorPoint::MiddleCenter)
-        {
-            xCoordinate = (canvasWidth - widget.width)/2;
-            yCoordinate = (canvasHeight - widget.height)/2;
-        }
-        else if(widget.anchorPoint == AnchorPoint::MiddleRight)
-        {
-            xCoordinate = canvasWidth - widget.width;
-            yCoordinate = (canvasHeight - widget.height)/2;
-        }
-        else if(widget.anchorPoint == AnchorPoint::BottomLeft)
-        {
-            xCoordinate = 0;
-            yCoordinate = canvasHeight - widget.height;
-        }
-        else if(widget.anchorPoint == AnchorPoint::MiddleCenter)
-        {
-            xCoordinate = (canvasWidth - widget.width)/2;
-            yCoordinate = canvasHeight - widget.height;
-        }
-        else if(widget.anchorPoint == AnchorPoint::MiddleRight)
-        {
-            xCoordinate = canvasWidth- widget.width;
-            yCoordinate = canvasHeight - widget.height;
-        }
-    }
-
     Widget& WidgetContainer::getFinalWidget(int& xPosition, int& yPosition)
     {
         for(Tuple<Widget*, int, int>* widgetGroup : widgets)

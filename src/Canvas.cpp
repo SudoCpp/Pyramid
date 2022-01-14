@@ -31,6 +31,7 @@
 */
 
 #include "Canvas.hpp"
+#include "Widget.hpp"
 
 namespace pyramid
 {
@@ -87,5 +88,54 @@ namespace pyramid
     {
         Font font{fontFileName, fontSize};
         font.getSize(text, width, height);
+    }
+
+    void Canvas::getCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate)
+    {
+        if(widget.anchorPoint == AnchorPoint::TopLeft)
+        {
+            xCoordinate = 0;
+            yCoordinate = 0;
+        }
+        else if(widget.anchorPoint == AnchorPoint::TopCenter)
+        {
+            xCoordinate = (width - widget.width)/2;
+            yCoordinate = 0;
+        }
+        else if(widget.anchorPoint == AnchorPoint::TopRight)
+        {
+            xCoordinate = width - widget.width;
+            yCoordinate = 0;
+        }
+        else if(widget.anchorPoint == AnchorPoint::MiddleLeft)
+        {
+            xCoordinate = 0;
+            yCoordinate = (height - widget.height)/2;
+        }
+        else if(widget.anchorPoint == AnchorPoint::MiddleCenter)
+        {
+            xCoordinate = (width - widget.width)/2;
+            yCoordinate = (height - widget.height)/2;
+        }
+        else if(widget.anchorPoint == AnchorPoint::MiddleRight)
+        {
+            xCoordinate = width - widget.width;
+            yCoordinate = (height - widget.height)/2;
+        }
+        else if(widget.anchorPoint == AnchorPoint::BottomLeft)
+        {
+            xCoordinate = 0;
+            yCoordinate = height - widget.height;
+        }
+        else if(widget.anchorPoint == AnchorPoint::MiddleCenter)
+        {
+            xCoordinate = (width - widget.width)/2;
+            yCoordinate = height - widget.height;
+        }
+        else if(widget.anchorPoint == AnchorPoint::MiddleRight)
+        {
+            xCoordinate = width - widget.width;
+            yCoordinate = height - widget.height;
+        }
     }
 }
