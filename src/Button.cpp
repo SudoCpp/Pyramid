@@ -37,27 +37,32 @@ namespace pyramid
     using namespace simplex;
     using namespace simplex::sdl;
 
-    Button::Button(string name, string text, string fontPath, int fontSize, RGBColor textColor, RGBColor buttonColor)
+    Button::Button(const simplex::string& name, const simplex::string& text, const simplex::string& fontPath, int fontSize,
+        const RGBColor& textColor, const RGBColor& buttonColor)
     : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
-    text{nullptr}, buttonDepressed{false}, buttonText{text},
-    textColor{textColor}, buttonColor{buttonColor}, fontPath{fontPath}, fontSize{fontSize}
-    {}
+    text{"text", text, fontPath, fontSize, textColor, buttonColor}, 
+    buttonDepressed{false}, buttonText{text},
+    textColor{textColor}, buttonColor{buttonColor}, 
+    fontPath{fontPath}, fontSize{fontSize}
+    {    }
 
     Button::~Button()
-    {
-        delete text;
-    }
+    {}
 
     void Button::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
         width = 200;
         height = 25;
-        delete text;
-        text = new Label{"text", buttonText, fontPath, fontSize, textColor, buttonColor};
-        text->draw(parentCanvasWidth, parentCanvasHeight);
-        canvas->drawRect(Color::Blue, 0, 0, width, height);
-        int xPosition, yPosition;
-        canvas->getCanvasCoordinates(*text, xPosition, yPosition);
-        canvas->copyToCanvas(text->getCanvas(), xPosition, yPosition);
+        Canvas& canvas = newCanvas();
+        canvas.fillRect(buttonColor, 0, 0, width, height);
+        canvas.drawLine(Color::Black, 0, 0, width-1, 0);
+        canvas.drawLine(Color::Black, 0, height-1, width-1, height-1);
+        canvas.drawLine(Color::Black, 0, 0, 0, height-1);
+        canvas.drawLine(Color::Black, width-1, 0, width-1, height-1);
+        //text.draw(parentCanvasWidth, parentCanvasHeight);
+        // canvas->drawRect(Color::Blue, 0, 0, width, height);
+        // int xPosition, yPosition;
+        // canvas->getCanvasCoordinates(text, xPosition, yPosition);
+        //canvas->copyToCanvas(text.getCanvas(), xPosition, yPosition);
     }
 }

@@ -41,7 +41,8 @@ namespace pyramid
     class Button : public Widget
     {
         bool buttonDepressed;
-        Label* text;
+        Label text;
+
         public:
         simplex::string buttonText;
         RGBColor textColor;
@@ -49,8 +50,8 @@ namespace pyramid
         simplex::string fontPath;
         int fontSize;
 
-        Button(simplex::string name, simplex::string text, simplex::string fontPath, int fontSize,
-        RGBColor textColor, RGBColor buttonColor);
+        Button(const simplex::string& name, const simplex::string& text, const simplex::string& fontPath, int fontSize,
+        const RGBColor& textColor, const RGBColor& buttonColor);
         virtual ~Button();
         
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
