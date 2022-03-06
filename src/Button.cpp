@@ -44,25 +44,34 @@ namespace pyramid
     buttonDepressed{false}, buttonText{text},
     textColor{textColor}, buttonColor{buttonColor}, 
     fontPath{fontPath}, fontSize{fontSize}
-    {    }
+    {
+        internalWidgets.add(&this->text);
+        mouseDown.connect(&Button::depressButton, this);
+    }
 
     Button::~Button()
     {}
+
+    void Button::depressButton(int xloc, int yloc, simplex::sdl::MouseButton button)
+    {
+        buttonDepressed = true;
+        widgetChanged.emit();
+    }
 
     void Button::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
         width = 200;
         height = 25;
         Canvas& canvas = newCanvas();
-        canvas.fillRect(buttonColor, 0, 0, width, height);
+        if(!buttonDepressed)
+            canvas.fillRect(buttonColor, 0, 0, width, height);
+        else
+            canvas.fillRect(Color::White, 0, 0, width, height);
         canvas.drawLine(Color::Black, 0, 0, width-1, 0);
         canvas.drawLine(Color::Black, 0, height-1, width-1, height-1);
         canvas.drawLine(Color::Black, 0, 0, 0, height-1);
         canvas.drawLine(Color::Black, width-1, 0, width-1, height-1);
-        //text.draw(parentCanvasWidth, parentCanvasHeight);
-        // canvas->drawRect(Color::Blue, 0, 0, width, height);
-        // int xPosition, yPosition;
-        // canvas->getCanvasCoordinates(text, xPosition, yPosition);
-        //canvas->copyToCanvas(text.getCanvas(), xPosition, yPosition);
+        text.draw(parentCanvasWidth, parentCanvasHeight);
+        canvas.copyToCanvas(text.getCanvas(), width/2-text.width/2, height/2-text.height/2);
     }
 }

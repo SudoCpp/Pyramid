@@ -53,6 +53,7 @@ namespace pyramid
         Button(const simplex::string& name, const simplex::string& text, const simplex::string& fontPath, int fontSize,
         const RGBColor& textColor, const RGBColor& buttonColor);
         virtual ~Button();
+        void depressButton(int, int, simplex::sdl::MouseButton button);
         
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
     };
