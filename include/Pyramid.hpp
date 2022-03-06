@@ -49,14 +49,15 @@ namespace pyramid
 
         static const RGBColor WidgetTextColor;
         static const RGBColor WidgetForegroundColor;
-        static const RGBColor WidgetBackgroundColor;
-
         static const int HoverTimer;
 
         Widget* lastMouseButtonWidget;
         Widget* lastMouseHoverWidget;
 
         public:
+        const static simplex::string DefaultFontPath;
+        const static RGBColor DefaultBackgroundColor;
+
         virtual ~Pyramid();
         template <typename WindowType, typename... Args>
         static WindowType& CreateWindow(Args&&... args);
