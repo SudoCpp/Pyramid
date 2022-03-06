@@ -50,11 +50,12 @@ namespace pyramid
         canvas = parentCanvas.createNewCanvas(width, height);
     }
 
-    void Widget::newCanvas()
+    Canvas& Widget::newCanvas()
     {
         Canvas* newCanvas = canvas->createNewCanvas(width, height);
         delete canvas;
         canvas = newCanvas;
+        return *canvas;
     }
 
     Canvas& Widget::getCanvas()
