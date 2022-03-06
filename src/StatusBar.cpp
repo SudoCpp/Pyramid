@@ -48,9 +48,9 @@ namespace pyramid
     void StatusBar::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
         width = parentCanvasWidth;
-        newCanvas();
-        getCanvas().fillRect(RGBColor{240, 240, 240}, 0, 0, width, height);
-        getCanvas().drawLine(RGBColor{216, 216, 216}, 0, 0, width, 0);
+        Canvas& canvas = newCanvas();
+        canvas.fillRect(RGBColor{240, 240, 240}, 0, 0, width, height);
+        canvas.drawLine(RGBColor{216, 216, 216}, 0, 0, width, 0);
 
     }
 
