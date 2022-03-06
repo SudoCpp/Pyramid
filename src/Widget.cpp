@@ -48,6 +48,8 @@ namespace pyramid
     void Widget::initWidget(Canvas& parentCanvas)
     {
         canvas = parentCanvas.createNewCanvas(width, height);
+        for(Widget* widget : internalWidgets)
+            widget->initWidget(*canvas);
     }
 
     Canvas& Widget::newCanvas()

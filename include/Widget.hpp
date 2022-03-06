@@ -46,6 +46,7 @@ namespace pyramid
     {
         protected:
         Canvas* canvas;
+        simplex::Array<Widget*> internalWidgets;
         
         public:
         int widgetID;
@@ -67,6 +68,8 @@ namespace pyramid
         simplex::Signal<> mouseLeave;
         simplex::Signal<int> mouseHorizontalScroll;
         simplex::Signal<int> mouseVerticalScroll;
+
+        simplex::Signal<> widgetChanged;
 
         Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation);
         virtual ~Widget();
