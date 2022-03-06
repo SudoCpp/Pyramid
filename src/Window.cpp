@@ -41,15 +41,17 @@ namespace pyramid
 
     Window::Window(string title, int width, int height, bool resizable)
     : WidgetContainer(title, width, height),
+    visuallyChanged{true},
     window{Framework::CreateWindow(title, width, height, resizable)}, 
     renderer{window.createRenderer()}, windowId{window.getID()}
     {
         canvas = new Canvas(renderer, width, height);
-        maximized.connect(&Window::draw, this);
-        restored.connect(&Window::draw, this);
-        resized.connect(&Window::draw, this);
+        maximized.connect(&Window::forceRedraw, this);
+        restored.connect(&Window::forceRedraw, this);
+        resized.connect(&Window::forceRedraw, this);
         gainedFocus.connect(&Window::dispatchGainedWindowFocus, this);
         lostFocus.connect(&Window::dispatchLostWindowFocus, this);
+        widgetChanged.connect(&Window::forceRedraw, this);
         draw();
     }
 
@@ -58,41 +60,45 @@ namespace pyramid
 
     void Window::draw()
     {
-        regenCanvas();
-        //Blank out window
-        canvas->fillRect(RGBColor{250, 250, 250}, 0, 0, window.getWidth(), window.getHeight());
-
-        int topOffset = 0;
-        int bottomOffset = 0;
-        bool centerPopulated = false;
-        
-        int widgetArraySize = widgets.size();
-        for(int loop = 0; loop < widgetArraySize; loop++)
+        if(visuallyChanged)
         {
-            Tuple<Widget*, int, int>* widgetGroup = widgets[loop];
-            Widget* widget = widgetGroup->at<0>();
-            widget->draw(canvas->width, canvas->height-topOffset-bottomOffset);
-            if(widget->dockLocation == DockLocation::Top)
+            regenCanvas();
+            //Blank out window
+            canvas->fillRect(RGBColor{250, 250, 250}, 0, 0, window.getWidth(), window.getHeight());
+
+            int topOffset = 0;
+            int bottomOffset = 0;
+            bool centerPopulated = false;
+            
+            int widgetArraySize = widgets.size();
+            for(int loop = 0; loop < widgetArraySize; loop++)
             {
-                widgetGroup->at<1>(0);
-                widgetGroup->at<2>(topOffset);
-                canvas->copyToCanvas(widget->getCanvas(), 0, topOffset);
-                topOffset += widget->height;
+                Tuple<Widget*, int, int>* widgetGroup = widgets[loop];
+                Widget* widget = widgetGroup->at<0>();
+                widget->draw(canvas->width, canvas->height-topOffset-bottomOffset);
+                if(widget->dockLocation == DockLocation::Top)
+                {
+                    widgetGroup->at<1>(0);
+                    widgetGroup->at<2>(topOffset);
+                    canvas->copyToCanvas(widget->getCanvas(), 0, topOffset);
+                    topOffset += widget->height;
+                }
+                else if(widget->dockLocation == DockLocation::Bottom)
+                {
+                    bottomOffset += widget->height;
+                    widgetGroup->at<1>(0);
+                    widgetGroup->at<2>(canvas->height-bottomOffset);
+                    canvas->copyToCanvas(widget->getCanvas(), 0, canvas->height-bottomOffset);
+                }
+                else if(widget->dockLocation == DockLocation::Center && !centerPopulated)
+                {
+                    centerPopulated = true;
+                    canvas->copyToCanvas(widget->getCanvas(), 0, topOffset);
+                }
             }
-            else if(widget->dockLocation == DockLocation::Bottom)
-            {
-                bottomOffset += widget->height;
-                widgetGroup->at<1>(0);
-                widgetGroup->at<2>(canvas->height-bottomOffset);
-                canvas->copyToCanvas(widget->getCanvas(), 0, canvas->height-bottomOffset);
-            }
-            else if(widget->dockLocation == DockLocation::Center && !centerPopulated)
-            {
-                centerPopulated = true;
-                canvas->copyToCanvas(widget->getCanvas(), 0, topOffset);
-            }
+            displayCanvas();
+            visuallyChanged = false;
         }
-        displayCanvas();
     }
 
     void Window::displayCanvas()
@@ -115,12 +121,20 @@ namespace pyramid
     {
         for(Tuple<Widget*, int, int>* widget : widgets)
             widget->at<0>()->gainedWindowFocus.emit();
+        visuallyChanged = true;
         draw();
     }
     void Window::dispatchLostWindowFocus()
     {
         for(Tuple<Widget*, int, int>* widget : widgets)
             widget->at<0>()->lostWindowFocus.emit();
+        visuallyChanged = true;
+        draw();
+    }
+
+    void Window::forceRedraw()
+    {
+        visuallyChanged = true;
         draw();
     }
 }

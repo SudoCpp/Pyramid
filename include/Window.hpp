@@ -47,6 +47,7 @@ namespace pyramid
 
         simplex::sdl::Window& window;
         simplex::sdl::Renderer& renderer;
+        bool visuallyChanged;
         
         public:
         uint32_t windowId;
@@ -75,6 +76,7 @@ namespace pyramid
 
         void dispatchGainedWindowFocus();
         void dispatchLostWindowFocus();
+        void forceRedraw();
     };
 }
 
