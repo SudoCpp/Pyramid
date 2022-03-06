@@ -41,7 +41,7 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Pyramid* Pyramid::instance = nullptr;
-    Pyramid::Pyramid() : Singleton{this}, lastWidgetID{0}, lastMouseButtonWidget{nullptr},
+    Pyramid::Pyramid() : lastWidgetID{0}, lastMouseButtonWidget{nullptr},
     lastMouseHoverWidget{nullptr} {}
     Pyramid::~Pyramid()
     {
