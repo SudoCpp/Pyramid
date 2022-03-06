@@ -39,16 +39,17 @@ namespace pyramid
 
     Label::Label(string name, string text, string fontPath, int fontSize, RGBColor textColor, RGBColor backgroundColor)
     : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
-    text{text}, textColor{textColor}, backgroundColor{backgroundColor}, fontPath{fontPath},
-    fontSize{fontSize}
-    {
-
-    }
+     text{text}, 
+     textColor{textColor}, backgroundColor{backgroundColor},
+     fontPath{fontPath},
+     fontSize{fontSize}
+    {}
 
     Label::~Label(){}
 
     void Label::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
-        getCanvas().drawText(textColor, fontPath, fontSize, 0, 0, text);
+        Canvas& canvas = newCanvas();
+        canvas.drawText(textColor, fontPath, fontSize, 0, 0, text);
     }
 }
