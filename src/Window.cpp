@@ -59,6 +59,7 @@ namespace pyramid
     void Window::draw()
     {
         regenCanvas();
+        //Blank out window
         canvas->fillRect(RGBColor{250, 250, 250}, 0, 0, window.getWidth(), window.getHeight());
 
         int topOffset = 0;
