@@ -40,13 +40,14 @@ namespace pyramid
 {
     const RGBColor Pyramid::WidgetTextColor = Color::Black;
     const RGBColor Pyramid::WidgetForegroundColor = {217, 217, 217};
-    const RGBColor Pyramid::WidgetBackgroundColor = {217, 217, 217};
     const int Pyramid::HoverTimer = 2000; //2 seconds
+    const simplex::string Pyramid::DefaultFontPath = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
+    const RGBColor Pyramid::DefaultBackgroundColor = {217, 217, 217};
 
     const int MenuBar::MenuBarHeight = 28;
     const int StatusBar::StatusBarHeight = 29;
 
-    simplex::string Menu::FontPath = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
+    simplex::string Menu::FontPath = Pyramid::DefaultFontPath;
     int Menu::FontSize = 13;
     RGBColor Menu::BackgroundColor = RGBColor{217, 217, 217};
     RGBColor Menu::TextColor = Color::Black;
