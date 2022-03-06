@@ -49,7 +49,9 @@ namespace pyramid
 
     void Label::draw(int parentCanvasWidth, int parentCanvasHeight)
     {
+        Canvas::GetTextSize(fontPath, fontSize, text, width, height);
         Canvas& canvas = newCanvas();
+        canvas.fillRect(backgroundColor, 0, 0, width, height);
         canvas.drawText(textColor, fontPath, fontSize, 0, 0, text);
     }
 }
