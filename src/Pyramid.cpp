@@ -133,8 +133,11 @@ namespace pyramid
         }
         if(event.mouseEventType == MouseEventType::ButtonUp)
             if(lastMouseButtonWidget)
+            {
                 if(lastMouseButtonWidget->widgetID == widget.widgetID)
                     widget.mouseClick.emit(relativeXPosition, relativeYPosition, event.mouseButton);
+                lastMouseButtonWidget->mouseUp.emit(-1, -1, MouseButton::None);
+            }
         if(event.mouseEventType == MouseEventType::ButtonUp)
             widget.mouseUp.emit(relativeXPosition, relativeYPosition, event.mouseButton);
         if(event.mouseEventType & MouseEventType::ScrollHorizontal)
