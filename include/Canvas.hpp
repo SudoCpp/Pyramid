@@ -53,6 +53,7 @@ namespace pyramid
         Canvas(simplex::sdl::Renderer& renderer, int width, int height);
         ~Canvas();
         void drawLine(RGBColor color, int point1x, int point1y, int point2x, int point2y);
+        void drawCircle(RGBColor color, int centerX, int centerY, int radius);
         void drawRect(RGBColor color, int x, int y, int width, int height);
         void fillRect(RGBColor color, int x, int y, int width, int height);
         void drawText(RGBColor color, simplex::string fontFileName, int fontSize, int x, int y, simplex::string text);

@@ -51,6 +51,47 @@ namespace pyramid
         renderer.drawLine(point1x, point1y, point2x, point2y);
         renderer.setTarget();
     }
+    void Canvas::drawCircle(RGBColor color, int centerX, int centerY, int radius)
+    {
+        renderer.setTarget(*texture);
+        renderer.setColor(color.color);
+
+        const int diameter = (radius * 2);
+
+        int x = (radius - 1);
+        int y = 0;
+        int dx = 1;
+        int dy = 1;
+        int error = (dx - diameter);
+
+        while (x >= y)
+        {
+            // Each of the following renders an octant of the circle
+            renderer.drawPoint(centerX + x, centerY - y);
+            renderer.drawPoint(centerX + x, centerY + y);
+            renderer.drawPoint(centerX - x, centerY - y);
+            renderer.drawPoint(centerX - x, centerY + y);
+            renderer.drawPoint(centerX + y, centerY - x);
+            renderer.drawPoint(centerX + y, centerY + x);
+            renderer.drawPoint(centerX - y, centerY - x);
+            renderer.drawPoint(centerX - y, centerY + x);
+
+            if (error <= 0)
+            {
+                ++y;
+                error += dy;
+                dy += 2;
+            }
+
+            if (error > 0)
+            {
+                --x;
+                dx += 2;
+                error += (dx - diameter);
+            }
+        }
+        renderer.setTarget();
+    }
     void Canvas::drawRect(RGBColor color, int x, int y, int width, int height)
     {
         renderer.setTarget(*texture);
