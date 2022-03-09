@@ -33,6 +33,13 @@
 #ifndef PYRAMID_CANVAS_HPP
 #define PYRAMID_CANVAS_HPP
 
+/* Currently no plans to move from SDL2, however it is as
+* losely coupled as possible so that other graphic libraries
+* can easily be subbed in.
+*
+* Also, all connections to a graphic libraries are in this class
+* so there are dependancies everywhere.
+*/
 #include "simplexsdl.hpp"
 #include "CMYColor.hpp"
 #include "RGBColor.hpp"
