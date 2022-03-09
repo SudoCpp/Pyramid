@@ -46,14 +46,15 @@ namespace pyramid
         public:
         simplex::string buttonText;
         RGBColor textColor;
-        RGBColor buttonColor;
+        RGBColor downButtonColor;
         simplex::string fontPath;
         int fontSize;
 
         Button(const simplex::string& name, const simplex::string& text, const simplex::string& fontPath, int fontSize,
-        const RGBColor& textColor, const RGBColor& buttonColor);
+        const RGBColor& textColor, const RGBColor& buttonColor, const RGBColor& downButtonColor);
         virtual ~Button();
-        void depressButton(int, int, simplex::sdl::MouseButton button);
+        void downAnimation(int, int, simplex::sdl::MouseButton button);
+        void upAnimation(int, int, simplex::sdl::MouseButton button);
         
         virtual void draw(int parentCanvasWidth, int parentCanvasHeight);
     };

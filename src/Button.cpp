@@ -38,21 +38,28 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Button::Button(const simplex::string& name, const simplex::string& text, const simplex::string& fontPath, int fontSize,
-        const RGBColor& textColor, const RGBColor& buttonColor)
-    : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
+        const RGBColor& textColor, const RGBColor& buttonColor, const RGBColor& downButtonColor)
+    : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center, buttonColor},
     text{"text", text, fontPath, fontSize, textColor, buttonColor}, 
     buttonDepressed{false}, buttonText{text},
-    textColor{textColor}, buttonColor{buttonColor}, 
+    textColor{textColor}, downButtonColor{downButtonColor},
     fontPath{fontPath}, fontSize{fontSize}
     {
         internalWidgets.add(&this->text);
-        mouseDown.connect(&Button::depressButton, this);
+        mouseDown.connect(&Button::downAnimation, this);
+        mouseUp.connect(&Button::upAnimation, this);
     }
 
     Button::~Button()
     {}
 
-    void Button::depressButton(int xloc, int yloc, simplex::sdl::MouseButton button)
+    void Button::upAnimation(int xloc, int yloc, simplex::sdl::MouseButton button)
+    {
+        buttonDepressed = false;
+        widgetChanged.emit();
+    }
+
+    void Button::downAnimation(int xloc, int yloc, simplex::sdl::MouseButton button)
     {
         buttonDepressed = true;
         widgetChanged.emit();
@@ -63,14 +70,15 @@ namespace pyramid
         width = 200;
         height = 25;
         Canvas& canvas = newCanvas();
-        if(!buttonDepressed)
-            canvas.fillRect(buttonColor, 0, 0, width, height);
-        else
-            canvas.fillRect(Color::White, 0, 0, width, height);
+        RGBColor backgroundColor = this->backgroundColor;
+        if(buttonDepressed)
+            backgroundColor = downButtonColor;
+        canvas.fillRect(backgroundColor, 0, 0, width, height);
         canvas.drawLine(Color::Black, 0, 0, width-1, 0);
         canvas.drawLine(Color::Black, 0, height-1, width-1, height-1);
         canvas.drawLine(Color::Black, 0, 0, 0, height-1);
         canvas.drawLine(Color::Black, width-1, 0, width-1, height-1);
+        text.backgroundColor = backgroundColor;
         text.draw(parentCanvasWidth, parentCanvasHeight);
         canvas.copyToCanvas(text.getCanvas(), width/2-text.width/2, height/2-text.height/2);
     }
