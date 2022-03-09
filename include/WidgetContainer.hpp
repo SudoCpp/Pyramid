@@ -70,6 +70,7 @@ namespace pyramid
     WidgetType& WidgetContainer::addWidget(Args&&... args)
     {
         WidgetType* widget = new WidgetType(std::forward<Args>(args)...);
+        widget->parentBackgroundColor = backgroundColor;
         widget->initWidget(*canvas);
         widgets.add(new simplex::Tuple<Widget*, int, int>{widget, 0, 0});
         widget->widgetChanged.connect(&widgetChanged);

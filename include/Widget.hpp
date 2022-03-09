@@ -55,6 +55,8 @@ namespace pyramid
         DockLocation dockLocation;
         int width;
         int height;
+        RGBColor parentBackgroundColor;
+        RGBColor backgroundColor;
 
         simplex::string toolTipText;
 
@@ -71,7 +73,8 @@ namespace pyramid
 
         simplex::Signal<> widgetChanged;
 
-        Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation);
+        Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation,
+            RGBColor backgroundColor);
         virtual ~Widget();
 
         virtual void initWidget(Canvas& parentCanvas);

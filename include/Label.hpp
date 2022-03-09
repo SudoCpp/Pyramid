@@ -42,7 +42,6 @@ namespace pyramid
         public:
         simplex::string text;
         RGBColor textColor;
-        RGBColor backgroundColor;
         simplex::string fontPath;
         int fontSize;
 

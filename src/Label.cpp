@@ -38,9 +38,9 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Label::Label(string name, string text, string fontPath, int fontSize, RGBColor textColor, RGBColor backgroundColor)
-    : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center},
+    : Widget{name, AnchorPoint::MiddleCenter, 0, 0, DockLocation::Center, backgroundColor },
      text{text}, 
-     textColor{textColor}, backgroundColor{backgroundColor},
+     textColor{textColor},
      fontPath{fontPath},
      fontSize{fontSize}
     {}

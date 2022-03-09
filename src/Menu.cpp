@@ -39,7 +39,7 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Menu::Menu(string name)
-    : Widget{name, AnchorPoint::MiddleLeft, 0, 0, DockLocation::Center}, windowHasFocus{true}
+    : Widget{name, AnchorPoint::MiddleLeft, 0, 0, DockLocation::Center, Menu::BackgroundColor}, windowHasFocus{true}
     {
         mouseDown.connect(&Menu::handleMouseDown, this);
     }

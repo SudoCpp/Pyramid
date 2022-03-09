@@ -35,8 +35,13 @@
 
 namespace pyramid
 {
-    Widget::Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, DockLocation dockLocation) : simplex::object{},
-    widgetID{Pyramid::GetWidgetID()}, name{name}, anchorPoint{anchorPoint}, dockLocation{dockLocation}, width{width}, height{height},
+    Widget::Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, 
+    DockLocation dockLocation, RGBColor backgroundColor) : simplex::object{},
+    widgetID{Pyramid::GetWidgetID()}, name{name}, anchorPoint{anchorPoint}, 
+    dockLocation{dockLocation}, width{width}, height{height}, 
+    //parentBackgroundColor must be defaulted to something, should be overriden almost immedately.
+    parentBackgroundColor{Color::White},
+    backgroundColor{backgroundColor},
     toolTipText{""}
     { }
 

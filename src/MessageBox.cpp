@@ -31,6 +31,7 @@
 */
 
 #include "MessageBox.hpp"
+#include "Pyramid.hpp"
 
 namespace pyramid
 {
@@ -38,8 +39,8 @@ namespace pyramid
     using namespace simplex::sdl;
 
     MessageBox::MessageBox(string title, string message)
-    : title{title}, message{message},
-    Widget{title, AnchorPoint::TopLeft, 0, 0, DockLocation::Center}
+    : Widget{title, AnchorPoint::TopLeft, 0, 0, DockLocation::Center, Pyramid::DefaultBackgroundColor},
+    title{title}, message{message}
     {
         
     }

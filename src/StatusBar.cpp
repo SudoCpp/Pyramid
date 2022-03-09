@@ -38,7 +38,7 @@ namespace pyramid
     using namespace simplex::sdl;
 
     StatusBar::StatusBar(string name)
-    : Widget{name, AnchorPoint::BottomLeft, -1, StatusBarHeight, DockLocation::Bottom}
+    : Widget{name, AnchorPoint::BottomLeft, -1, StatusBarHeight, DockLocation::Bottom, RGBColor{240, 240, 240}}
     { 
         mouseDown.connect(&StatusBar::handleMouseDown, this);
     }
@@ -49,7 +49,7 @@ namespace pyramid
     {
         width = parentCanvasWidth;
         Canvas& canvas = newCanvas();
-        canvas.fillRect(RGBColor{240, 240, 240}, 0, 0, width, height);
+        canvas.fillRect(backgroundColor, 0, 0, width, height);
         canvas.drawLine(RGBColor{216, 216, 216}, 0, 0, width, 0);
 
     }
