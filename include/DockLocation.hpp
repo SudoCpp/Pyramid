@@ -39,6 +39,7 @@ namespace pyramid
     {
         enum DockLocation
         {
+            Full,
             Center,
             Top,
             Left,
