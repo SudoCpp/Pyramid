@@ -30,26 +30,22 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __PYRAMID_HPP__
-#define __PYRAMID_HPP__
+#ifndef PYRAMID_PEN_HPP
+#define PYRAMID_PEN_HPP
 
-#include "include/AnchorPoint.hpp"
-#include "include/Button.hpp"
-#include "include/Canvas.hpp"
-#include "include/CMYColor.hpp"
-#include "include/Color.hpp"
-#include "include/DockLocation.hpp"
-#include "include/Label.hpp"
-#include "include/Menu.hpp"
-#include "include/MenuBar.hpp"
-#include "include/MessageBox.hpp"
-#include "include/Pen.hpp"
-#include "include/Pyramid.hpp"
-#include "include/RGBColor.hpp"
-#include "include/StatusBar.hpp"
-#include "include/TableContainer.hpp"
-#include "include/Widget.hpp"
-#include "include/WidgetContainer.hpp"
-#include "include/Window.hpp"
+#include "RGBColor.hpp"
 
-#endif //__PYRAMID_HPP__
+namespace pyramid
+{
+    class Pen
+    {       
+        public:
+        RGBColor& color;
+        uint8_t pixelsWide;
+
+        Pen(RGBColor color, uint8_t pixelsWide = 1)
+        : color{color}, pixelsWide{pixelsWide} {}
+    };
+}
+
+#endif //PYRAMID_PEN_HPP
