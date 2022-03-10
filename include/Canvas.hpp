@@ -43,6 +43,7 @@
 #include "simplexsdl.hpp"
 #include "CMYColor.hpp"
 #include "RGBColor.hpp"
+#include "Pen.hpp"
 
 namespace pyramid
 {
@@ -59,9 +60,10 @@ namespace pyramid
         int height;
         Canvas(simplex::sdl::Renderer& renderer, int width, int height);
         ~Canvas();
-        void drawLine(RGBColor color, int point1x, int point1y, int point2x, int point2y);
-        void drawCircle(RGBColor color, int centerX, int centerY, int radius);
-        void drawRect(RGBColor color, int x, int y, int width, int height);
+        void drawLine(Pen pen, int point1x, int point1y, int point2x, int point2y);
+        void drawCircle(Pen pen, int centerX, int centerY, int radius);
+        void drawRect(Pen pen, int x, int y, int width, int height);
+        void fillCircle(RGBColor color, int centerX, int centerY, int radius);
         void fillRect(RGBColor color, int x, int y, int width, int height);
         void drawText(RGBColor color, simplex::string fontFileName, int fontSize, int x, int y, simplex::string text);
         void copyToCanvas(Canvas& childCanvas, int xPosition, int yPosition);
@@ -69,6 +71,9 @@ namespace pyramid
         void getCanvasCoordinates(Widget& widget, int& xCoordinate, int& yCoordinate);
 
         static void GetTextSize(simplex::string fontFileName, int fontSize, const simplex::string& text, int& width, int& height);
+
+        private:
+        void drawCircle(int centerX, int centerY, int radius);
     };
 }
 

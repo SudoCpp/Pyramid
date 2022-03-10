@@ -44,18 +44,30 @@ namespace pyramid
     {
         delete texture;
     }
-    void Canvas::drawLine(RGBColor color, int point1x, int point1y, int point2x, int point2y)
+    void Canvas::drawLine(Pen pen, int point1x, int point1y, int point2x, int point2y)
     {
         renderer.setTarget(*texture);
-        renderer.setColor(color.color);
+        renderer.setColor(pen.color.color);
         renderer.drawLine(point1x, point1y, point2x, point2y);
         renderer.setTarget();
     }
-    void Canvas::drawCircle(RGBColor color, int centerX, int centerY, int radius)
+    void Canvas::drawCircle(Pen pen, int centerX, int centerY, int radius)
     {
         renderer.setTarget(*texture);
-        renderer.setColor(color.color);
+        renderer.setColor(pen.color.color);
+        int floor = simplex::Math::Floor((float)pen.pixelsWide/2);
+        int ceil = simplex::Math::Ceiling((float)pen.pixelsWide/2);
+        for(int loop = 0; loop < ceil; loop++)
+        {
+            drawCircle(centerX, centerY, radius + loop);
+            if(floor == ceil || loop < (ceil-1))
+                drawCircle(centerX, centerY, radius - loop - 1);
+        }
 
+        renderer.setTarget();
+    }
+    void Canvas::drawCircle(Pen pen, int centerX, int centerY, int radius)
+    {
         const int diameter = (radius * 2);
 
         int x = (radius - 1);
@@ -90,13 +102,28 @@ namespace pyramid
                 error += (dx - diameter);
             }
         }
+    }
+    void Canvas::drawRect(Pen pen, int x, int y, int width, int height)
+    {
+        renderer.setTarget(*texture);
+        renderer.setColor(pen.color.color);
+        int floor = simplex::Math::Floor((float)pen.pixelsWide/2);
+        int ceil = simplex::Math::Ceiling((float)pen.pixelsWide/2);
+        for(int loop = 0; loop < ceil; loop++)
+        {
+            renderer.drawRect(x - loop, y - loop, width + loop * 2, height + loop * 2);
+            if(floor == ceil || loop < (ceil-1))
+                renderer.drawRect(x + loop+1, y + loop+1, width - (loop+1) * 2, height - (loop+1) * 2);
+        }
         renderer.setTarget();
     }
-    void Canvas::drawRect(RGBColor color, int x, int y, int width, int height)
+    void Canvas::fillCircle(RGBColor color, int centerX, int centerY, int radius)
     {
         renderer.setTarget(*texture);
         renderer.setColor(color.color);
-        renderer.drawRect(x, y, width, height);
+        renderer.drawPoint(centerX, centerY);
+        for (int loop = radius; loop > 0; loop--)
+            drawCircle(centerX, centerY, loop);
         renderer.setTarget();
     }
     void Canvas::fillRect(RGBColor color, int x, int y, int width, int height)
