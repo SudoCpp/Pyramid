@@ -41,13 +41,10 @@ namespace pyramid
     using namespace simplex::sdl;
 
     Pyramid* Pyramid::instance = nullptr;
-    Pyramid::Pyramid() : lastWidgetID{0}, lastMouseButtonWidget{nullptr},
+    Pyramid::Pyramid() : windows{true}, lastWidgetID{0}, lastMouseButtonWidget{nullptr},
     lastMouseHoverWidget{nullptr} {}
     Pyramid::~Pyramid()
-    {
-        for(Window* window : windows)
-            delete window;
-    }
+    {}
     Pyramid& Pyramid::GetInstance()
     {
         if(instance == nullptr)

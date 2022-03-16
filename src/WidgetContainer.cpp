@@ -38,7 +38,7 @@ namespace pyramid
     using namespace simplex;
 
     WidgetContainer::WidgetContainer(simplex::string name, int width, int height)
-    :Widget{name, AnchorPoint::TopLeft, width, height, DockLocation::Center, Color::White}
+    :Widget{name, AnchorPoint::TopLeft, width, height, DockLocation::Center, Color::White}, widgets{false}
     {
         canvas = nullptr;
     }

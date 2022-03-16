@@ -74,10 +74,10 @@ namespace pyramid
         if(buttonDepressed)
             backgroundColor = downButtonColor;
         canvas.fillRect(backgroundColor, 0, 0, width, height);
-        canvas.drawLine(Color::Black, 0, 0, width-1, 0);
-        canvas.drawLine(Color::Black, 0, height-1, width-1, height-1);
-        canvas.drawLine(Color::Black, 0, 0, 0, height-1);
-        canvas.drawLine(Color::Black, width-1, 0, width-1, height-1);
+        canvas.drawLine(Pen{Color::Black, 1}, 0, 0, width-1, 0);
+        canvas.drawLine(Pen{Color::Black, 1}, 0, height-1, width-1, height-1);
+        canvas.drawLine(Pen{Color::Black, 1}, 0, 0, 0, height-1);
+        canvas.drawLine(Pen{Color::Black, 1}, width-1, 0, width-1, height-1);
         text.backgroundColor = backgroundColor;
         text.draw(parentCanvasWidth, parentCanvasHeight);
         canvas.copyToCanvas(text.getCanvas(), width/2-text.width/2, height/2-text.height/2);

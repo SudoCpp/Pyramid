@@ -39,7 +39,8 @@ namespace pyramid
     using namespace simplex::sdl;
 
     MenuBar::MenuBar(string name)
-    : Widget{name, AnchorPoint::TopLeft, width, MenuBarHeight, DockLocation::Top, Menu::BackgroundColor}, activated{false}
+    : Widget{name, AnchorPoint::TopLeft, width, MenuBarHeight, DockLocation::Top, Menu::BackgroundColor}, 
+    menus{false}, activated{false}
     {
         gainedWindowFocus.connect(&MenuBar::windowFocusGained, this);
         lostWindowFocus.connect(&MenuBar::windowFocusLost, this);

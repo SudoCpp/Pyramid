@@ -66,7 +66,7 @@ namespace pyramid
 
         renderer.setTarget();
     }
-    void Canvas::drawCircle(Pen pen, int centerX, int centerY, int radius)
+    void Canvas::drawCircle(int centerX, int centerY, int radius)
     {
         const int diameter = (radius * 2);
 

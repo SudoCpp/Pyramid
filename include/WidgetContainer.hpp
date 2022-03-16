@@ -61,7 +61,7 @@ namespace pyramid
         WidgetType& getWidget(simplex::string widgetName);
 
         template <typename WidgetType>
-        WidgetType* removeWidget(simplex::string widgetName);
+        void removeWidget(simplex::string widgetName);
     };
 
     #define __class__ "pyramid::WidgetContainer"
@@ -88,15 +88,15 @@ namespace pyramid
     }
 
     template <typename WidgetType>
-    WidgetType* WidgetContainer::removeWidget(simplex::string widgetName)
+    void WidgetContainer::removeWidget(simplex::string widgetName)
     {
         int widgetsSize = widgets.size();
         for(int loop = 0; loop < widgetsSize; loop++)
             if(widgets[loop]->at<0>()->name == widgetName)
             {
-                Widget* widget = widgets[loop];
-                widgets.removeAt(loop);
-                return widget;
+                delete widgets[loop]->at<0>();
+                widgets.removeAt(loop, true);
+                
             }
         throw Exception("Widget with name '" + widgetName + "' can not be found.", __ExceptionParams__);
     }
