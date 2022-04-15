@@ -30,27 +30,28 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __PYRAMID_HPP__
-#define __PYRAMID_HPP__
+#include "Menu.hpp"
+#include "MenuBar.hpp"
+#include "StatusBar.hpp"
+#include "Pyramid.hpp"
+#include "Widget.hpp"
 
-#include "include/AnchorPoint.hpp"
-#include "include/Button.hpp"
-#include "include/Canvas.hpp"
-#include "include/CMYColor.hpp"
-#include "include/Color.hpp"
-#include "include/DockLocation.hpp"
-#include "include/Label.hpp"
-#include "include/Menu.hpp"
-#include "include/MenuBar.hpp"
-#include "include/MessageBox.hpp"
-#include "include/Pen.hpp"
-#include "include/Pyramid.hpp"
-#include "include/RGBColor.hpp"
-#include "include/StatusBar.hpp"
-#include "include/TableContainer.hpp"
-#include "include/Theme.hpp"
-#include "include/Widget.hpp"
-#include "include/WidgetContainer.hpp"
-#include "include/Window.hpp"
+namespace pyramid
+{
+    const RGBColor Pyramid::WidgetTextColor = Color::Black;
+    const RGBColor Pyramid::WidgetForegroundColor = {217, 217, 217};
+    const int Pyramid::HoverTimer = 2000; //2 seconds
+    const simplex::string Pyramid::DefaultFontPath = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
+    const RGBColor Pyramid::DefaultBackgroundColor = {217, 217, 217};
 
-#endif //__PYRAMID_HPP__
+    const int MenuBar::MenuBarHeight = 28;
+    const int StatusBar::StatusBarHeight = 29;
+
+    simplex::string Menu::FontPath = Pyramid::DefaultFontPath;
+    int Menu::FontSize = 13;
+    RGBColor Menu::BackgroundColor = RGBColor{217, 217, 217};
+    RGBColor Menu::TextColor = Color::Black;
+    RGBColor Menu::TextColorNoWindowFocus = Color::DarkGray;
+    RGBColor Menu::HilightBackgroundColor = Color::DarkGray;
+    RGBColor Menu::HilightTextColor = Color::White;
+}

@@ -30,27 +30,11 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __PYRAMID_HPP__
-#define __PYRAMID_HPP__
+#ifndef PYRAMID_THEME_HPP
+#define PYRAMID_THEME_HPP
 
-#include "include/AnchorPoint.hpp"
-#include "include/Button.hpp"
-#include "include/Canvas.hpp"
-#include "include/CMYColor.hpp"
-#include "include/Color.hpp"
-#include "include/DockLocation.hpp"
-#include "include/Label.hpp"
-#include "include/Menu.hpp"
-#include "include/MenuBar.hpp"
-#include "include/MessageBox.hpp"
-#include "include/Pen.hpp"
-#include "include/Pyramid.hpp"
-#include "include/RGBColor.hpp"
-#include "include/StatusBar.hpp"
-#include "include/TableContainer.hpp"
-#include "include/Theme.hpp"
-#include "include/Widget.hpp"
-#include "include/WidgetContainer.hpp"
-#include "include/Window.hpp"
+    #ifndef PYRAMID_THEME //If this is defined in CMake or the commandline don't override it
+        #define PYRAMID_THEME PYRAMID_THEME_GNOME
+    #endif
 
-#endif //__PYRAMID_HPP__
+#endif //PYRAMID_THEME_HPP

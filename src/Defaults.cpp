@@ -1,57 +1,17 @@
-/*
-    BSD 3-Clause License
-    
-    Copyright (c) 2022, SudoCpp
-    All rights reserved.
+#include "Theme.hpp"
 
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions are met:
+#define PYRAMID_THEME_DOTNET 1
+#define PYRAMID_THEME_GNOME 2
+#define PYRAMID_THEME_QT 3
 
-    1. Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
-
-    2. Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
-
-    3. Neither the name of the copyright holder nor the names of its
-    contributors may be used to endorse or promote products derived from
-    this software without specific prior written permission.
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
-#include "Menu.hpp"
-#include "MenuBar.hpp"
-#include "StatusBar.hpp"
-#include "Pyramid.hpp"
-#include "Widget.hpp"
-
-namespace pyramid
-{
-    const RGBColor Pyramid::WidgetTextColor = Color::Black;
-    const RGBColor Pyramid::WidgetForegroundColor = {217, 217, 217};
-    const int Pyramid::HoverTimer = 2000; //2 seconds
-    const simplex::string Pyramid::DefaultFontPath = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
-    const RGBColor Pyramid::DefaultBackgroundColor = {217, 217, 217};
-
-    const int MenuBar::MenuBarHeight = 28;
-    const int StatusBar::StatusBarHeight = 29;
-
-    simplex::string Menu::FontPath = Pyramid::DefaultFontPath;
-    int Menu::FontSize = 13;
-    RGBColor Menu::BackgroundColor = RGBColor{217, 217, 217};
-    RGBColor Menu::TextColor = Color::Black;
-    RGBColor Menu::TextColorNoWindowFocus = Color::DarkGray;
-    RGBColor Menu::HilightBackgroundColor = Color::DarkGray;
-    RGBColor Menu::HilightTextColor = Color::White;
-}
+#ifndef PYRAMID_THEME
+#error "Pyramid UI requires a style"
+#elif PYRAMID_THEME == PYRAMID_THEME_DOTNET
+#include "DefaultsDotNet.cpp"
+#elif PYRAMID_THEME == PYRAMID_THEME_GNOME
+#include "DefaultsGnome.cpp"
+#elif PYRAMID_THEME == PYRAMID_THEME_QT
+#include "DefaultsQt.cpp"
+#else
+#error "Pyramid UI requires a valid style"
+#endif
