@@ -5,6 +5,8 @@ project(Pyramid VERSION 1.0.0)
 # libsdl2-dev
 # libsdl2-ttf-dev
 
+set(ProjectType SHARED) #options are SHARED and STATIC
+
 set(Packages
     )
 
@@ -33,7 +35,7 @@ set(SourceFiles
 
         #Tabbed over values do not need to be edited
         if(NOT TARGET ${PROJECT_NAME})
-add_library(${PROJECT_NAME} SHARED ${SourceFiles})
+            add_library(${PROJECT_NAME} ${ProjectType} ${SourceFiles})
 #target_link_libraries(${PROJECT_NAME} "-l_additional_libraries")
             # Unix systems required the dl library for dynamically loading libraries
             if (UNIX)
