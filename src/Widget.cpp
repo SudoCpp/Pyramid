@@ -37,7 +37,8 @@ namespace pyramid
 {
     Widget::Widget(simplex::string name, AnchorPoint anchorPoint, int width, int height, 
     DockLocation dockLocation, RGBColor backgroundColor) : simplex::object{},
-    internalWidgets{true},
+    //Internal Widgets should be known before widget is created and they should be allocated with main widget.
+    internalWidgets{false},
     widgetID{Pyramid::GetWidgetID()}, name{name}, anchorPoint{anchorPoint}, 
     dockLocation{dockLocation}, width{width}, height{height}, 
     //parentBackgroundColor must be defaulted to something, should be overriden almost immedately.
